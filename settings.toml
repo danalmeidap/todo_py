@@ -1,0 +1,5 @@
+
+name = "todo"
+
+[database]
+url = "sqlite:///todo.db"
