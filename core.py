@@ -62,8 +62,6 @@ def delete_task_from_database(task_id: int) -> bool:
         statement = select(ToDo).where(ToDo.id == task_id)
         result = session.exec(statement)
         task = result.one()
-        if task.is_active:
-            task.is_active = False
-            session.commit()
-            return True
-        return False
+        session.delete(task)
+        session.commit()
+        return True
