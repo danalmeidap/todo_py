@@ -13,5 +13,5 @@ class ToDo(
     id: Optional[int] = Field(primary_key=True, default=None, index=True)
     name: str = Field(sa_column=Column("name", String, unique=True))
     description: str
-    added_on: datetime = Field(default_factory=datetime.now)
+    added_on: Optional[datetime] = Field(default_factory=datetime.now)
     is_active: Optional[bool] = True
