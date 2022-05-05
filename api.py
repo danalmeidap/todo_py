@@ -25,9 +25,10 @@ async def get_product_by_id(task_id: int, response: Response):
         response.status_code = status.HTTP_404_NOT_FOUND
     else:
         with get_session() as session:
-            statement = select(ToDo).where(ToDo.id == task_id)
-            results = session.exec(statement)
-            task = results.one()
+            result = session.exec(
+                statement=select(ToDo).where(ToDo.id == task_id)
+            )
+            task = result.one()
             session.refresh(task)
         response.status_code = status.HTTP_200_OK
     return task if task else response
