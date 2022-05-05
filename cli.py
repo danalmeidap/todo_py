@@ -13,10 +13,8 @@ from core import (
     update_task_description_from_database,
     update_task_name_from_database,
 )
-from validations import (
-    validate_index,
-    validate_task_description,
-    validate_task_name)
+from models import ToDo
+from validations import validate_index, validate_task_description, validate_task_name
 
 
 def task_register() -> None:
@@ -42,7 +40,7 @@ def task_list():
     menu()
 
 
-def generate_task_table(tasks):
+def generate_task_table(tasks:ToDo):
     table: Table = Table(title="ToDo List")
     headers: List[str] = [
         "id",
@@ -50,6 +48,7 @@ def generate_task_table(tasks):
         "description",
         "added_on",
     ]
+    print(type(tasks))
     for header in headers:
         table.add_column(header, style="magenta")
     for task in tasks:

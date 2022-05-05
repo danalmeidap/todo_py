@@ -5,15 +5,14 @@ from sqlmodel import select
 
 from database import get_session
 from models import ToDo
+from task_repository import TaskRepository
 
 
 def add_task_to_database(name: str, description: str) -> bool:
     """Add a task to database"""
+    todo = ToDo(name=name, description=description)
     try:
-        with get_session() as session:
-            task = ToDo(**locals())
-            session.add(task)
-            session.commit()
+        task_repository.add(todo)
     except sqlalchemy.exc.IntegrityError:
         return False
     return True
@@ -28,44 +27,25 @@ def get_tasks_from_database() -> List[ToDo]:
 
 def get_task_by_id_from_database(task_id: int) -> List[ToDo]:
     """Get a task from database by id"""
-    with get_session() as session:
-        statement = select(ToDo).where(ToDo.id == task_id)
-        return list(session.exec(statement))
+    return [task_repository.get_by_id(task_id)]
 
 
 def update_task_name_from_database(
     task_id: int, new_task_name: str
 ) -> List[ToDo]:
     """Update task name from database using id"""
-    with get_session() as session:
-        statement = select(ToDo).where(ToDo.id == task_id)
-        results = session.exec(statement)
-        task = results.one()
-        task.name = new_task_name
-        session.commit()
-        statement = select(ToDo).where(ToDo.id == task_id)
-        return list(session.exec(statement))
+    return [task_repository.update_name(task_id, new_task_name)]
 
 
 def update_task_description_from_database(
     task_id: int, new_task_description: str
 ) -> List[ToDo]:
     """Update task description from database using id"""
-    with get_session() as session:
-        statement = select(ToDo).where(ToDo.id == task_id)
-        results = session.exec(statement)
-        task = results.one()
-        task.name = new_task_description
-        session.commit()
-        statement = select(ToDo).where(ToDo.id == task_id)
-        return list(session.exec(statement))
+    return [task_repository.update_description(task_id, new_task_description)]
 
 
 def delete_task_from_database(task_id: int) -> bool:
-    with get_session() as session:
-        statement = select(ToDo).where(ToDo.id == task_id)
-        result = session.exec(statement)
-        task = result.one()
-        session.delete(task)
-        session.commit()
-        return True
+    return task_repository.delete(task_id)
+
+
+task_repository = TaskRepository(get_session())
