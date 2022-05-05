@@ -30,6 +30,7 @@ def task_register() -> None:
 
 
 def task_list():
+    """Get tasks list"""
     tasks = get_tasks_from_database()
     if len(tasks) > 0:
         table = generate_task_table(tasks)
@@ -41,6 +42,7 @@ def task_list():
 
 
 def generate_task_table(tasks:ToDo):
+    """Generate task table"""
     table: Table = Table(title="ToDo List")
     headers: List[str] = [
         "id",
@@ -59,6 +61,7 @@ def generate_task_table(tasks:ToDo):
 
 
 def search_task_by_id():
+    """Get task from database by id"""
     tasks = get_tasks_from_database()
     if len(tasks) > 0:
         index = validate_index("Index for searching: ")
@@ -72,6 +75,7 @@ def search_task_by_id():
 
 
 def update_task_name():
+    """Update task name"""
     tasks = get_tasks_from_database()
     if len(tasks) > 0:
         index = validate_index("Index for searching: ")
@@ -86,6 +90,7 @@ def update_task_name():
 
 
 def update_task_description():
+    """Update task description"""
     tasks = get_tasks_from_database()
     if len(tasks) > 0:
         index = validate_index("Index for searching: ")
@@ -100,6 +105,7 @@ def update_task_description():
 
 
 def delete_task():
+    """Delete task from database"""
     tasks = get_tasks_from_database()
     if len(tasks) > 0:
         index = validate_index("Index for searching: ")
