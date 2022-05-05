@@ -4,9 +4,19 @@ from typing import List
 from rich import print
 from rich.console import Console
 from rich.table import Table
-from core import add_task_to_database, get_tasks_from_database, get_task_by_id_from_database, \
-    update_task_name_from_database, update_task_description_from_database, delete_task_from_database
-from validations import validate_index, validate_task_name, validate_task_description
+
+from core import (
+    add_task_to_database,
+    delete_task_from_database,
+    get_task_by_id_from_database,
+    get_tasks_from_database,
+    update_task_description_from_database,
+    update_task_name_from_database,
+)
+from validations import (
+    validate_index,
+    validate_task_description,
+    validate_task_name)
 
 
 def task_register() -> None:
@@ -44,9 +54,7 @@ def generate_task_table(tasks):
         table.add_column(header, style="magenta")
     for task in tasks:
         task.added_on = task.added_on.strftime("%Y-%m-%d")
-        values: List[str] = [
-            str(getattr(task, header)) for header in headers
-        ]
+        values: List[str] = [str(getattr(task, header)) for header in headers]
         table.add_row(*values)
     return table
 

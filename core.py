@@ -33,7 +33,9 @@ def get_task_by_id_from_database(task_id: int) -> List[ToDo]:
         return list(session.exec(statement))
 
 
-def update_task_name_from_database(task_id: int, new_task_name: str) -> List[ToDo]:
+def update_task_name_from_database(
+    task_id: int, new_task_name: str
+) -> List[ToDo]:
     """Update task name from database using id"""
     with get_session() as session:
         statement = select(ToDo).where(ToDo.id == task_id)
@@ -45,7 +47,9 @@ def update_task_name_from_database(task_id: int, new_task_name: str) -> List[ToD
         return list(session.exec(statement))
 
 
-def update_task_description_from_database(task_id: int, new_task_description: str) -> List[ToDo]:
+def update_task_description_from_database(
+    task_id: int, new_task_description: str
+) -> List[ToDo]:
     """Update task description from database using id"""
     with get_session() as session:
         statement = select(ToDo).where(ToDo.id == task_id)

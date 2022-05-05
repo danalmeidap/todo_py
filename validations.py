@@ -1,8 +1,9 @@
-from core import get_tasks_from_database
+from sys import exit
 from typing import List
+
+from core import get_tasks_from_database
 from models import ToDo
 from reader import read_input_as_integer, read_input_as_string
-from sys import exit
 
 
 def validate_index(msg: str) -> int:
