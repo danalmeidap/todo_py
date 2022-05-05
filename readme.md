@@ -1,5 +1,5 @@
 <h1 align="center">ToDo List</h1>
-<p align="center">Application for adding tasks, using CLI or API</p>
+<p align="center">Application for scheduling task, using CLI or API</p>
 <p>This  application uses:</p>
 <ul>
     <li> <a href="https://www.python.org/downloads/release/python-3810/">Python</a></li>
