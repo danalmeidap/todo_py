@@ -45,6 +45,7 @@ def update_task_description_from_database(
 
 
 def delete_task_from_database(task_id: int) -> bool:
+    """Delete a task from database by id"""
     return task_repository.delete(task_id)
 
 
